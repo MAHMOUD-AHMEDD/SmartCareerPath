@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Domain.Entites.Identity
+﻿namespace SmartCareerPath.Domain.Entites.Identity
 {
-    internal class Mentor
+    public class Mentor : AppUser
     {
+        public int YearsOfExperience { get; set; }
+        public int TotalStudentsTaught { get; set; }
+        public string? Description { get; set; }
+        public string? Company { get; set; }
+        public string? LinkedIn { get; set; }
+        public int? CurrentJobId { get; set; }
+        public LookupValue? CurrentJob { get; set; }
+        public int? TrackId { get; set; }
+        public CareerTrack? Track { get; set; }
+        public ICollection<Chat> Chats { get; set; } = [];
     }
 }

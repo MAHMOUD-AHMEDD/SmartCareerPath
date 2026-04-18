@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Domain.Enums
+﻿namespace SmartCareerPath.Domain.Enums
 {
-    internal class RoadmapItemStatus
+    public enum RoadmapItemStatus
     {
+        NotStarted,
+        InProgress,
+        Completed
     }
 }

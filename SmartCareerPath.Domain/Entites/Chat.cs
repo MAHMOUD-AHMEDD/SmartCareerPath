@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartCareerPath.Domain.Entites.Identity;
 
 namespace SmartCareerPath.Domain.Entites
 {
-    internal class Chat
+    public class Chat
     {
+        public int Id { get; set; }
+        public string SeekerId { get; set; } = string.Empty;
+        public string MentorId { get; set; } = string.Empty;
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;
+        public Seeker Seeker { get; set; } = null!;
+        public Mentor Mentor { get; set; } = null!;
+        public ICollection<Message> Messages { get; set; } = [];
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Domain.Entites.Identity
+﻿namespace SmartCareerPath.Domain.Entites.Identity
 {
-    internal class Seeker
+    public class Seeker : AppUser
     {
+        public string? LinkedIn { get; set; }
+        public int? CurrentJobId { get; set; }
+        public LookupValue? CurrentJob { get; set; }
+        public ICollection<Answer> Answers { get; set; } = [];
+        public ICollection<SeekerQuestionOption> SelectedOptions { get; set; } = [];
+        public ICollection<Recommendation> Recommendations { get; set; } = [];
+        public ICollection<SeekerRoadmapProgress> RoadmapProgress { get; set; } = [];
+        public ICollection<Chat> Chats { get; set; } = [];
     }
 }

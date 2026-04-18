@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Domain.Entites
+﻿namespace SmartCareerPath.Domain.Entites
 {
-    internal class LookupType
+    public class LookupType
     {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;    //  "JobTitle"
+        public ICollection<LookupValue> Values { get; set; } = [];
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Domain.Entites.Identity
+﻿namespace SmartCareerPath.Domain.Entites.Identity
 {
-    internal class Admin
+    public class Admin : AppUser
     {
     }
 }

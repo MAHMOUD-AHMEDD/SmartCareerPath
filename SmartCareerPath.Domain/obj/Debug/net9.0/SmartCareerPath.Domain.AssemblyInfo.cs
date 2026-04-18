@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartCareerPath.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+742590ae31a8ef0a0819318b01f8c45f693479aa")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartCareerPath.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartCareerPath.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
