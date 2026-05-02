@@ -12,4 +12,4 @@ namespace SmartCareerPath.Domain.Entites
         public AppUser User { get; set; } = null!;
     }
 }
-}
+
