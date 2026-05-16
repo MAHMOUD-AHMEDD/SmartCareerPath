@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8022da1aa2e47b90a65dfcce2d24bb135a686f1e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e6c5990c5b9700bf0b07f30579b62d0cee2b0c5")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

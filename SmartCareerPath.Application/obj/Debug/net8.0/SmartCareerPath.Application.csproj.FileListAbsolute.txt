@@ -1,0 +1,16 @@
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\bin\Debug\net8.0\SmartCareerPath.Application.deps.json
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\bin\Debug\net8.0\SmartCareerPath.Application.dll
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\bin\Debug\net8.0\SmartCareerPath.Application.pdb
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\bin\Debug\net8.0\SmartCareerPath.Domain.dll
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\bin\Debug\net8.0\SmartCareerPath.Domain.pdb
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.csproj.AssemblyReference.cache
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.AssemblyInfoInputs.cache
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.AssemblyInfo.cs
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.csproj.CoreCompileInputs.cache
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.sourcelink.json
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCar.600BCABC.Up2Date
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.dll
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\refint\SmartCareerPath.Application.dll
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\SmartCareerPath.Application.pdb
+D:\Graduation Project\Implemntaion\SmartCareerPath.Application\obj\Debug\net8.0\ref\SmartCareerPath.Application.dll
