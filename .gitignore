@@ -1,2 +1,6 @@
 .vs/
 SmartCareerPath.API/appsettings.json
+
+# Build output
+bin/
+obj/
