@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.API\\SmartCareerPath.API.csproj": {}
+    "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.API\\SmartCareerPath.API.csproj": {}
   },
   "projects": {
-    "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.API\\SmartCareerPath.API.csproj": {
+    "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.API\\SmartCareerPath.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.API\\SmartCareerPath.API.csproj",
+        "projectUniqueName": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.API\\SmartCareerPath.API.csproj",
         "projectName": "SmartCareerPath.API",
-        "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.API\\SmartCareerPath.API.csproj",
-        "packagesPath": "C:\\Users\\Mahmoud\\.nuget\\packages\\",
-        "outputPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.API\\obj\\",
+        "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.API\\SmartCareerPath.API.csproj",
+        "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
+        "outputPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -30,10 +30,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj": {
-                "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj"
+              "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj": {
+                "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj"
               }
             }
           }
@@ -48,10 +49,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
@@ -94,24 +96,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj": {
+    "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj",
+        "projectUniqueName": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj",
         "projectName": "SmartCareerPath.Application",
-        "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj",
-        "packagesPath": "C:\\Users\\Mahmoud\\.nuget\\packages\\",
-        "outputPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\obj\\",
+        "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj",
+        "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
+        "outputPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -124,10 +126,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj": {
-                "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj"
+              "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj": {
+                "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj"
               }
             }
           }
@@ -142,10 +145,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
@@ -181,24 +185,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj": {
+    "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj",
+        "projectUniqueName": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj",
         "projectName": "SmartCareerPath.Domain",
-        "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj",
-        "packagesPath": "C:\\Users\\Mahmoud\\.nuget\\packages\\",
-        "outputPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Domain\\obj\\",
+        "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\SmartCareerPath.Domain.csproj",
+        "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
+        "outputPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -211,6 +215,7 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -225,10 +230,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
@@ -252,24 +258,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj": {
+    "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj",
         "projectName": "SmartCareerPath.Infrastructure",
-        "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Mahmoud\\.nuget\\packages\\",
-        "outputPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Infrastructure\\obj\\",
+        "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\SmartCareerPath.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\VIP\\.nuget\\packages\\",
+        "outputPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VIP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -282,10 +288,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj": {
-                "projectPath": "D:\\Graduation Project\\Implemntaion\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj"
+              "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj": {
+                "projectPath": "D:\\Gradution Project MASAR\\SmartCareerPath\\SmartCareerPath.Application\\SmartCareerPath.Application.csproj"
               }
             }
           }
@@ -300,10 +307,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
@@ -357,7 +365,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
