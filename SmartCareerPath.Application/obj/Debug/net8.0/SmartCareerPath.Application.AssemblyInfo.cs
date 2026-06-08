@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8c98767d221f90aca3e45b790e0ed04890f5159")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00273eb1572bbeba4d0dee03000ef54133eb72ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartCareerPath.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
