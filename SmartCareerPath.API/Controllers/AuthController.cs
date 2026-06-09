@@ -47,4 +47,13 @@ public class AuthController : ControllerBase
         await _authService.RevokeTokenAsync(userId);
         return NoContent();
     }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        await _authService.LogoutAsync(userId);
+        return NoContent();
+    }
 }

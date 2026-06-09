@@ -89,7 +89,17 @@ builder.Services.AddSingleton<JwtTokenService>();
 builder.Services.AddScoped<ILookupService, LookupService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 
+// -- Phase 4 ---------------------------------
 
+builder.Services.AddScoped<ICareerTrackService, CareerTrackService>();
+builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+builder.Services.AddScoped<IRoadmapItemService, RoadmapItemService>();
+builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
+
+// -- Phase 5 ---------------------------------
+
+builder.Services.AddScoped<ISeekerService, SeekerService>();
 
 // ===============================================
 // 5. FLUENTVALIDATION

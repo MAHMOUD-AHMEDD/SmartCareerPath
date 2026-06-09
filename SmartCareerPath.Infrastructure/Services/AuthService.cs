@@ -180,5 +180,19 @@ namespace SmartCareerPath.Infrastructure.Services
         }
 
 
+
+        public async Task LogoutAsync(string userId)
+        {
+            var token = await _db.RefreshTokens
+                .FirstOrDefaultAsync(r => r.UserId == userId);
+
+            if (token is not null)
+            {
+                _db.RefreshTokens.Remove(token);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+
     }
 }
