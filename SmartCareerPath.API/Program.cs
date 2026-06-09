@@ -15,6 +15,19 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 // ===============================================
 // 1. DATABASE
 // ===============================================
@@ -129,6 +142,8 @@ builder.Services.AddSwaggerGen(c =>
 // ===============================================
 var app = builder.Build();
 
+app.UseCors("AllowAll");
+
 // ===============================================
 // 7. SEED DATABASE
 // ===============================================
@@ -142,11 +157,10 @@ using (var scope = app.Services.CreateScope())
 // ===============================================
 app.UseMiddleware<GlobalExceptionMiddleware>(); // FIRST - wraps everything
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 

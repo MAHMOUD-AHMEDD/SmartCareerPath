@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCareerPath.Application.Constants;
-using SmartCareerPath.Application.DTOs;
 using SmartCareerPath.Application.DTOs.RoadmapItem;
 using SmartCareerPath.Application.Interfaces;
-
 namespace SmartCareerPath.API.Controllers.Admin;
 
 [ApiController]
