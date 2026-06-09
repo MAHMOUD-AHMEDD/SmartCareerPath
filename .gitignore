@@ -1,6 +1,49 @@
-.vs/
-SmartCareerPath.API/appsettings.json
-
-# Build output
+# =====================
+# .NET Build Output
+# =====================
 bin/
 obj/
+
+# =====================
+# Visual Studio
+# =====================
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# =====================
+# Publish Output
+# =====================
+**/publish/
+**/PublishProfiles/
+
+# =====================
+# NuGet
+# =====================
+*.nupkg
+*.snupkg
+project.lock.json
+packages/
+!**/packages/build/
+
+# =====================
+# Secrets & Config
+# =====================
+appsettings.json
+appsettings.*.json
+!appsettings.Development.json
+.env
+.env.*
+secrets.json
+
+# =====================
+# Logs & Temp Files
+# =====================
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
