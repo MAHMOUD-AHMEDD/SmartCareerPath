@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartCareerPath.Application.Common;
 using SmartCareerPath.Application.DTOs.Mentor;
+using SmartCareerPath.Application.Interfaces;
 using SmartCareerPath.Domain.Entites.Identity;
 using SmartCareerPath.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartCareerPath.Infrastructure.Services
 {
-    public class MentorService
+    public class MentorService : IMentorService
     {
         private readonly AppDbContext _db;
         public MentorService(AppDbContext db)

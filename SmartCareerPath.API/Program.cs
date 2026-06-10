@@ -101,6 +101,16 @@ builder.Services.AddScoped<IQuestionService, QuestionService>();
 
 builder.Services.AddScoped<ISeekerService, SeekerService>();
 
+// -- Phase 6 ---------------------------------
+
+builder.Services.AddScoped<IMentorService, MentorService>();
+
+
+
+
+
+
+
 // ===============================================
 // 5. FLUENTVALIDATION
 // ===============================================
