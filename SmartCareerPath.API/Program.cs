@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using SmartCareerPath.API.Hubs;
 using SmartCareerPath.API.Middleware;
 using SmartCareerPath.Application.Interfaces;
 using SmartCareerPath.Application.Validator.Auth;
@@ -113,6 +114,8 @@ builder.Services.AddScoped<IMentorService, MentorService>();
 
 builder.Services.AddScoped<IRecommendationService, RecommendationService>();
 
+// -- Phase 8 ---------------------------------
+builder.Services.AddScoped<IChatService, ChatService>();
 
 
 
@@ -227,6 +230,8 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 
 
+// --- Services ---
+builder.Services.AddSignalR();
 
 // ===============================================
 // BUILD
@@ -294,6 +299,7 @@ app.MapHealthChecks("/health", new HealthCheckOptions
         await context.Response.WriteAsJsonAsync(result);
     }
 });
+app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();
 
