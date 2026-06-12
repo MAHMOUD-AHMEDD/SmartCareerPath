@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartCareerPath.API.Middleware;
+using SmartCareerPath.API.Hubs;
 using SmartCareerPath.Application.Interfaces;
 using SmartCareerPath.Application.Validator.Auth;
 using SmartCareerPath.Domain.Entites.Identity;
@@ -157,6 +158,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+
+// --- Services ---
+builder.Services.AddSignalR();
+builder.Services.AddScoped<IChatService, ChatService>();
+
 // ===============================================
 // BUILD
 // ===============================================
@@ -189,8 +195,7 @@ app.UseAuthorization();  // enforces [Authorize] attributes
 
 app.MapControllers();
 
-// Phase 8 — uncomment when SignalR is implemented 
-// app.MapHub<ChatHub>("/hubs/chat");
+app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();
 
