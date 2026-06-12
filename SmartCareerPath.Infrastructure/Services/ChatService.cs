@@ -90,7 +90,85 @@ namespace SmartCareerPath.Infrastructure.Services
         }
 
         public async Task<ChatHistoryDto> GetChatHistoryAsync(
-    int chatId, string userId, int page, int pageSize)
+               int chatId, string userId, int page, int pageSize)
+        {
+            // Clamp pagination
+            page = page < 1 ? 1 : page;
+            pageSize = pageSize < 1 ? 10 : (pageSize > 50 ? 50 : pageSize);
+
+            var chat = await _db.Chats
+                .Include(c => c.Seeker)
+                .Include(c => c.Mentor)
+                .FirstOrDefaultAsync(c => c.Id == chatId)
+                ?? throw new KeyNotFoundException($"Chat {chatId} not found.");
+
+            var messagesQuery = _db.Messages
+                .Where(m => m.ChatId == chatId)
+                .OrderByDescending(m => m.Timestamp);
+
+            var totalCount = await messagesQuery.CountAsync();
+
+            var messages = await messagesQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // OrderByDescending fetches newest pages first (correct for pagination),
+            // but within a page messages arrive newest-to-oldest which breaks chat UI rendering.
+            // Re-sort the materialised page to ascending before mapping to DTOs.
+            messages = messages.OrderBy(m => m.Timestamp).ToList();
+
+            // Resolve sender names in bulk — one query each, not per message (avoids N+1)
+            var seekerIds = messages
+                .Where(m => m.SenderSeekerId != null)
+                .Select(m => m.SenderSeekerId!).Distinct().ToList();
+
+            var mentorIds = messages
+                .Where(m => m.SenderMentorId != null)
+                .Select(m => m.SenderMentorId!).Distinct().ToList();
+
+            var seekerNames = await _db.Seekers
+                .Where(s => seekerIds.Contains(s.Id))
+                .ToDictionaryAsync(s => s.Id, s => $"{s.FirstName} {s.LastName}");
+
+            var mentorNames = await _db.Mentors
+                .Where(m => mentorIds.Contains(m.Id))
+                .ToDictionaryAsync(m => m.Id, m => $"{m.FirstName} {m.LastName}");
+
+            var chatDto = new ChatDto(
+                chat.Id, chat.SeekerId, chat.MentorId,
+                $"{chat.Seeker.FirstName} {chat.Seeker.LastName}",
+                $"{chat.Mentor.FirstName} {chat.Mentor.LastName}",
+                chat.StartDate
+            );
+
+            var messageDtos = messages.Select(m =>
+            {
+                var (senderId, senderRole, senderName) = m.SenderSeekerId != null
+                    ? (m.SenderSeekerId,
+                       Roles.Seeker,
+                       seekerNames.GetValueOrDefault(m.SenderSeekerId!, "Unknown"))
+                    : (m.SenderMentorId!,
+                       Roles.Mentor,
+                       mentorNames.GetValueOrDefault(m.SenderMentorId!, "Unknown"));
+
+                return new MessageDto(
+                    m.Id, m.ChatId, senderId, senderName, senderRole, m.Content, m.Timestamp);
+            }).ToList();
+
+            return new ChatHistoryDto(
+                chatDto,
+                new PagedResult<MessageDto>
+                {
+                    Items = messageDtos,
+                    TotalCount = totalCount,
+                    Page = page,
+                    PageSize = pageSize
+                }
+            );
+        }
+        public async Task<ChatHistoryDto> GetChatHistoryAsync(
+                     int chatId, int page, int pageSize)
         {
             // Clamp pagination
             page = page < 1 ? 1 : page;

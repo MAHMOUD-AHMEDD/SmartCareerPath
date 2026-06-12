@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SmartCareerPath.Application.Interfaces
 {
-    // Application/Interfaces/IChatService.cs
     public interface IChatService
     {
         // REST operations
         Task<ChatDto> CreateChatAsync(string seekerId, CreateChatDto dto);
         Task<PagedResult<ChatDto>> GetUserChatsAsync(string userId, string role, int page, int pageSize);
-        Task<ChatHistoryDto> GetChatHistoryAsync(
-            int chatId, string userId, int page, int pageSize);
+        // userId removed — authorization is enforced by the controller via UserBelongsToChatAsync
+        // before this method is called. Accepting userId here without using it is dead code.
+        Task<ChatHistoryDto> GetChatHistoryAsync(int chatId, int page, int pageSize);
 
         // Called by SignalR Hub
         Task<MessageDto> SaveMessageAsync(

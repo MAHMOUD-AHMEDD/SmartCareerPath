@@ -56,7 +56,9 @@ namespace SmartCareerPath.API.Controllers
             if (!await _chatService.UserBelongsToChatAsync(UserId, id))
                 return Forbid();
 
-            return Ok(await _chatService.GetChatHistoryAsync(id, UserId, page, pageSize));
+            // userId removed from GetChatHistoryAsync — authorization already enforced above
+            // via UserBelongsToChatAsync. Passing it into the service was dead code.
+            return Ok(await _chatService.GetChatHistoryAsync(id, page, pageSize));
         }
     }
 }
