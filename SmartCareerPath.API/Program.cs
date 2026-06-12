@@ -97,7 +97,6 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 // -- Phase 4 ---------------------------------
 
 builder.Services.AddScoped<ICareerTrackService, CareerTrackService>();
-builder.Services.AddScoped<IRoadmapService, RoadmapService>();
 builder.Services.AddScoped<IRoadmapItemService, RoadmapItemService>();
 builder.Services.AddScoped<IRoadmapService, RoadmapService>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
@@ -233,6 +232,20 @@ builder.Host.UseSerilog((ctx, lc) => lc
 // --- Services ---
 builder.Services.AddSignalR();
 
+
+
+
+
+
+// Health check service registration
+builder.Services.AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")!,
+        name: "database",
+        tags: ["db", "sqlserver"]
+    );
+
+
 // ===============================================
 // BUILD
 // ===============================================
@@ -267,20 +280,7 @@ app.MapControllers();
 
 
 
-
-
-
-
-
-//Health Check 
-
-builder.Services.AddHealthChecks()
-    .AddSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")!,
-        name: "database",
-        tags: ["db", "sqlserver"]
-    );
-
+// Health check middleware mapping
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = async (context, report) =>
@@ -299,6 +299,10 @@ app.MapHealthChecks("/health", new HealthCheckOptions
         await context.Response.WriteAsJsonAsync(result);
     }
 });
+
+
+
+
 app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();
