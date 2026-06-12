@@ -24,6 +24,8 @@ namespace SmartCareerPath.Infrastructure.Persistence.Configurations
                    .HasForeignKey(m => m.SenderMentorId)
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
+            //Timestamp reserved word
+            builder.Property(m => m.Timestamp).HasColumnName("message_timestamp");
             // Check constraint — exactly one sender must be set
             builder.ToTable(t => t.HasCheckConstraint(
             "CK_Message_Sender",

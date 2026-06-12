@@ -1,16 +1,20 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using SmartCareerPath.API.Middleware;
 using SmartCareerPath.Application.Interfaces;
 using SmartCareerPath.Application.Validator.Auth;
 using SmartCareerPath.Domain.Entites.Identity;
 using SmartCareerPath.Infrastructure.Persistence;
 using SmartCareerPath.Infrastructure.Services;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -105,6 +109,10 @@ builder.Services.AddScoped<ISeekerService, SeekerService>();
 
 builder.Services.AddScoped<IMentorService, MentorService>();
 
+// -- Phase 7 ---------------------------------
+
+builder.Services.AddScoped<IRecommendationService, RecommendationService>();
+
 
 
 
@@ -155,7 +163,70 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+
+    // NEW — group endpoints by controller area
+    c.TagActionsBy(api =>
+    {
+        if (api.GroupName != null) return [api.GroupName];
+        var controller = api.ActionDescriptor.RouteValues["controller"];
+        return [controller!];
+    });
+
+    //XML doc comments(optional)
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath)) c.IncludeXmlComments(xmlPath);
+
 });
+
+
+
+
+// Fluent Validation final error shape 
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(e => e.Value!.Errors.Count > 0)
+            .SelectMany(e => e.Value!.Errors
+                .Select(x => new { field = e.Key, message = x.ErrorMessage }))
+            .ToList();
+
+        return new BadRequestObjectResult(new
+        {
+            statusCode = 400,
+            error = "Validation failed.",
+            details = errors
+        });
+    };
+});
+
+
+
+
+// Serilog Logging
+
+builder.Host.UseSerilog((ctx, lc) => lc
+    .ReadFrom.Configuration(ctx.Configuration)
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: "logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 7
+    )
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()  // requires Serilog.Enrichers.Environment
+);
+
+
+
+
+
+
+
+
+
 
 // ===============================================
 // BUILD
@@ -189,8 +260,40 @@ app.UseAuthorization();  // enforces [Authorize] attributes
 
 app.MapControllers();
 
-// Phase 8 — uncomment when SignalR is implemented 
-// app.MapHub<ChatHub>("/hubs/chat");
+
+
+
+
+
+
+
+//Health Check 
+
+builder.Services.AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")!,
+        name: "database",
+        tags: ["db", "sqlserver"]
+    );
+
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(e => new
+            {
+                name = e.Key,
+                status = e.Value.Status.ToString(),
+                duration = e.Value.Duration.TotalMilliseconds
+            })
+        };
+        await context.Response.WriteAsJsonAsync(result);
+    }
+});
 
 app.Run();
 
