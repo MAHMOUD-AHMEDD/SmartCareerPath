@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SmartCareerPath.Application.Constants;
-using SmartCareerPath.Application.DTOs.Chat;
 using SmartCareerPath.Application.Interfaces;
 using System.Security.Claims;
 
@@ -30,13 +27,16 @@ namespace SmartCareerPath.API.Controllers
             ?? throw new InvalidOperationException("Role claim missing from token.");
 
         // POST /api/chats — Seeker only
-        [HttpPost]
-        [Authorize(Roles = Roles.Seeker)]
-        public async Task<IActionResult> CreateChat([FromBody] CreateChatDto dto)
-        {
-            var result = await _chatService.CreateChatAsync(UserId, dto);
-            return CreatedAtAction(nameof(GetHistory), new { id = result.Id }, result);
-        }
+        // As of Phase 11, chats are created automatically inside ChatRequestService.AcceptAsync
+        // when a mentor accepts a seeker's request. The seeker never calls POST /api/chats.
+        // The chatId is returned in the acceptance response and the seeker notification.
+        //[HttpPost]
+        //[Authorize(Roles = Roles.Seeker)]
+        //public async Task<IActionResult> CreateChat([FromBody] CreateChatDto dto)
+        //{
+        //    var result = await _chatService.CreateChatAsync(UserId, dto);
+        //    return CreatedAtAction(nameof(GetHistory), new { id = result.Id }, result);
+        //}
 
         // GET /api/chats?page=1&pageSize=10
         [HttpGet]
