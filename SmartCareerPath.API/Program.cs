@@ -118,7 +118,10 @@ builder.Services.AddScoped<IRecommendationService, RecommendationService>();
 builder.Services.AddScoped<IChatService, ChatService>();
 
 
+//Phase 11
 
+builder.Services.AddScoped<IChatRequestService, ChatRequestService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 
 

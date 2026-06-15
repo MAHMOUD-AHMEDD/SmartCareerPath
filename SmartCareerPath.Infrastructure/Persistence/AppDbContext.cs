@@ -27,6 +27,8 @@ namespace SmartCareerPath.Infrastructure.Persistence
         public DbSet<Recommendation> Recommendations => Set<Recommendation>();
         public DbSet<Chat> Chats => Set<Chat>();
         public DbSet<Message> Messages => Set<Message>();
+        public DbSet<ChatRequest> ChatRequests => Set<ChatRequest>();
+        public DbSet<Notification> Notifications => Set<Notification>();
 
 
         protected override void OnModelCreating(ModelBuilder builder)
