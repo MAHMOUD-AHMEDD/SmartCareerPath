@@ -10,5 +10,12 @@ namespace SmartCareerPath.Application.Interfaces
         Task<AuthResponseDto> RefreshTokenAsync(string refreshToken);
         Task RevokeTokenAsync(string userId);
         Task LogoutAsync(string userId);
+        // Email confirmation
+        Task ConfirmEmailAsync(string email, string token);
+        Task ResendConfirmationEmailAsync(string email);
+
+        // Password reset
+        Task ForgotPasswordAsync(string email);
+        Task ResetPasswordAsync(ResetPasswordDto dto);
     }
 }

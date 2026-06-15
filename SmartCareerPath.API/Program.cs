@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using SmartCareerPath.API.Hubs;
 using SmartCareerPath.API.Middleware;
+using SmartCareerPath.Application;
 using SmartCareerPath.Application.Interfaces;
 using SmartCareerPath.Application.Validator.Auth;
 using SmartCareerPath.Domain.Entites.Identity;
@@ -226,7 +227,11 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 
 
+// Reset and Forget Password
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 // --- Services ---

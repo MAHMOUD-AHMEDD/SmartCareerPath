@@ -6,7 +6,8 @@
     DateTime AccessTokenExpiry,
     string UserId,
     string Email,
-    string Role
+    string Role,
+    bool EmailConfirmed
 );
 
 }

@@ -56,4 +56,48 @@ public class AuthController : ControllerBase
         await _authService.LogoutAsync(userId);
         return NoContent();
     }
+
+
+    // GET /api/auth/confirm-email?email=...&token=...
+    [HttpGet("confirm-email")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ConfirmEmail(
+        [FromQuery] string email, [FromQuery] string token)
+    {
+        await _authService.ConfirmEmailAsync(email, token);
+        return Ok(new { message = "Email confirmed successfully. You can now login." });
+    }
+
+    // POST /api/auth/resend-confirmation
+    [HttpPost("resend-confirmation")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResendConfirmation([FromBody] ResendConfirmationDto dto)
+    {
+        await _authService.ResendConfirmationEmailAsync(dto.Email);
+        return Ok(new
+        {
+            message = "If your email is registered and unconfirmed, a new link has been sent."
+        });
+    }
+
+    // POST /api/auth/forgot-password
+    [HttpPost("forgot-password")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto dto)
+    {
+        await _authService.ForgotPasswordAsync(dto.Email);
+        return Ok(new
+        {
+            message = "If an account exists for this email, a reset token has been sent."
+        });
+    }
+
+    // POST /api/auth/reset-password
+    [HttpPost("reset-password")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+    {
+        await _authService.ResetPasswordAsync(dto);
+        return Ok(new { message = "Password reset successfully. You can now login." });
+    }
 }
