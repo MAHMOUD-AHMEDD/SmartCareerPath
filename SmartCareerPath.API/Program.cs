@@ -264,9 +264,28 @@ app.UseCors("AllowAll");
 // ===============================================
 // 7. SEED DATABASE
 // ===============================================
+// ===============================================
+// 7. SEED DATABASE & AUTO-MIGRATE
+// ===============================================
 using (var scope = app.Services.CreateScope())
 {
-    await DataSeeder.SeedAsync(scope.ServiceProvider);
+    var services = scope.ServiceProvider;
+    try
+    {
+        // 1. Get the database context
+        var context = services.GetRequiredService<AppDbContext>();
+
+        // 2. Automatically apply any pending migrations (Builds the tables in MonsterASP)
+        await context.Database.MigrateAsync();
+
+        // 3. Seed the initial data (Admin user, roles, etc.)
+        await DataSeeder.SeedAsync(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred during database migration or seeding.");
+    }
 }
 
 // ===============================================

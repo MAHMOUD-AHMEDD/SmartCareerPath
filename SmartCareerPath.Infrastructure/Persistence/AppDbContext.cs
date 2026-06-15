@@ -48,6 +48,14 @@ namespace SmartCareerPath.Infrastructure.Persistence
 
 
 
+            //  Override the rule for Question Options
+            builder.Entity<Question>()
+            .HasMany(q => q.Options)
+            .WithOne(o => o.Question)
+            .HasForeignKey(o => o.QuestionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
         }
     }
 
