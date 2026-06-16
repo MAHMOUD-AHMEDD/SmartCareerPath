@@ -32,5 +32,21 @@ namespace SmartCareerPath.API.Controllers.Admin
         [HttpGet("mentors/{id}")]
         public async Task<IActionResult> GetMentor(string id)
             => Ok(await _adminService.GetMentorByIdAsync(id));
+
+        // DELETE /api/admin/users/seekers/{id}
+        [HttpDelete("seekers/{id}")]
+        public async Task<IActionResult> DeleteSeeker(string id)
+        {
+            await _adminService.DeleteSeekerAsync(id);
+            return NoContent();
+        }
+
+        // DELETE /api/admin/users/mentors/{id}
+        [HttpDelete("mentors/{id}")]
+        public async Task<IActionResult> DeleteMentor(string id)
+        {
+            await _adminService.DeleteMentorAsync(id);
+            return NoContent();
+        }
     }
 }

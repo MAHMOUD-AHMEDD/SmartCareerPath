@@ -9,5 +9,7 @@ namespace SmartCareerPath.Application.Interfaces
         Task<PagedResult<MentorSummaryDto>> GetAllMentorsAsync(int page, int pageSize);
         Task<SeekerDetailDto> GetSeekerByIdAsync(string id);
         Task<MentorDetailDto> GetMentorByIdAsync(string id);
+        Task DeleteSeekerAsync(string seekerId);
+        Task DeleteMentorAsync(string mentorId);
     }
 }
