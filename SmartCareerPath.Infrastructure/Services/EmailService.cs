@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using SmartCareerPath.Application;
 using SmartCareerPath.Application.Interfaces;
+
 namespace SmartCareerPath.Infrastructure.Services
 {
 
@@ -57,51 +58,37 @@ namespace SmartCareerPath.Infrastructure.Services
             var message = BuildMessage(toEmail, toName,
                 "Reset your Smart Career Path password");
 
-            // Why no {{ }} or &nbsp; here:
-            // Mixing {{ }} brace escaping with HTML entities like &nbsp; inside $""" raw strings
-            // causes corruption in Notion and confuses developers copying the code.
-            // A clean HTML table shows the same information with zero escaping issues.
             message.Body = new TextPart("html")
             {
                 Text = $"""
                 <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;">
-                    <h2 style="color:#4F46E5;">Password Reset Request</h2>
+                    <h2 style="color:#4F46E5;">Reset Your Password</h2>
                     <p>Hi {toName},</p>
-                    <p>Copy the token below, then call the endpoint shown to reset your password.</p>
+                    <p>We received a request to reset your Smart Career Path password.</p>
+                    <p>Use the code below to create a new password:</p>
 
-                    <p><strong>Your reset token:</strong></p>
-                    <div style="background:#F3F4F6;padding:14px;border-radius:6px;
-                                word-break:break-all;font-family:monospace;font-size:12px;">
-                        {resetToken}
+                    <div style="background:#F3F4F6;border:2px dashed #4F46E5;border-radius:8px;
+                                padding:20px;text-align:center;margin:24px 0;">
+                        <p style="color:#6B7280;font-size:12px;margin:0 0 10px 0;">
+                            YOUR RESET CODE
+                        </p>
+                        <div style="font-family:monospace;font-size:14px;font-weight:bold;
+                                    word-break:break-all;color:#1F2937;">
+                            {resetToken}
+                        </div>
                     </div>
 
-                    <p style="margin-top:20px;">
-                        <strong>Endpoint:</strong> POST {_settings.BaseUrl}/api/auth/reset-password
+                    <p>
+                        Go to the app, open the <strong>Reset Password</strong> page,
+                        and enter this code along with your new password.
                     </p>
 
-                    <p><strong>Request body:</strong></p>
-                    <table style="border-collapse:collapse;width:100%;font-size:13px;">
-                        <tr>
-                            <td style="padding:8px;border:1px solid #e5e7eb;"><strong>email</strong></td>
-                            <td style="padding:8px;border:1px solid #e5e7eb;">{toEmail}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:8px;border:1px solid #e5e7eb;"><strong>token</strong></td>
-                            <td style="padding:8px;border:1px solid #e5e7eb;">paste the token above</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:8px;border:1px solid #e5e7eb;"><strong>newPassword</strong></td>
-                            <td style="padding:8px;border:1px solid #e5e7eb;">YourNewPassword@123</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:8px;border:1px solid #e5e7eb;"><strong>confirmPassword</strong></td>
-                            <td style="padding:8px;border:1px solid #e5e7eb;">YourNewPassword@123</td>
-                        </tr>
-                    </table>
-
-                    <p style="color:#6B7280;font-size:13px;margin-top:20px;">Token expires in 24 hours.</p>
+                    <p style="color:#6B7280;font-size:13px;margin-top:24px;">
+                        This code expires in 24 hours.
+                    </p>
                     <p style="color:#6B7280;font-size:13px;">
-                        If you did not request a password reset, ignore this email.
+                        If you did not request a password reset, you can safely ignore this email.
+                        Your account remains secure.
                     </p>
                 </div>
                 """
@@ -135,4 +122,5 @@ namespace SmartCareerPath.Infrastructure.Services
         }
     }
 }
+
 

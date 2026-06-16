@@ -195,7 +195,8 @@ namespace SmartCareerPath.Infrastructure.Services
                 Description = dto.Description,
                 LinkedIn = dto.LinkedIn,
                 CurrentJobId = dto.CurrentJobId,
-                TrackId = dto.TrackId
+                TrackId = dto.TrackId,
+                Phone = dto.Phone
             };
 
             // 3. Create via UserManager (handles password hashing)
@@ -239,7 +240,8 @@ namespace SmartCareerPath.Infrastructure.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 LinkedIn = dto.LinkedIn,
-                CurrentJobId = dto.CurrentJobId
+                CurrentJobId = dto.CurrentJobId,
+                Phone = dto.Phone
             };
 
             var result = await _userManager.CreateAsync(seeker, dto.Password);

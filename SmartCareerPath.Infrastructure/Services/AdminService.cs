@@ -56,7 +56,7 @@ namespace SmartCareerPath.Infrastructure.Services
                 ?? throw new KeyNotFoundException($"Seeker {id} not found.");
             return new SeekerDetailDto(
                 seeker.Id, seeker.FirstName, seeker.LastName, seeker.Email!,
-                seeker.LinkedIn, seeker.CurrentJobId, seeker.CurrentJob?.Value);
+                seeker.LinkedIn, seeker.CurrentJobId, seeker.CurrentJob?.Value, seeker.Phone);
         }
 
         public async Task<MentorDetailDto> GetMentorByIdAsync(string id)
@@ -71,7 +71,7 @@ namespace SmartCareerPath.Infrastructure.Services
                 mentor.YearsOfExperience, mentor.TotalStudentsTaught,
                 mentor.Description, mentor.Company, mentor.LinkedIn,
                 mentor.CurrentJobId, mentor.CurrentJob?.Value,
-                mentor.TrackId, mentor.Track?.Name);
+                mentor.TrackId, mentor.Track?.Name, mentor.Phone);
         }
     }
 }

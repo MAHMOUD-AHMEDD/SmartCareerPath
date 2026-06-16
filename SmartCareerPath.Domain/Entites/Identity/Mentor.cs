@@ -7,6 +7,7 @@
         public string? Description { get; set; }
         public string? Company { get; set; }
         public string? LinkedIn { get; set; }
+        public string? Phone { get; set; }
         public int? CurrentJobId { get; set; }
         public LookupValue? CurrentJob { get; set; }
         public int? TrackId { get; set; }

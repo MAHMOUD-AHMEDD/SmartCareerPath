@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartCareerPath.Application.DTOs.Mentor
+﻿namespace SmartCareerPath.Application.DTOs.Mentor
 {
     public record UpdateMentorProfileDto(
      string FirstName, string LastName,
@@ -13,5 +7,5 @@ namespace SmartCareerPath.Application.DTOs.Mentor
      string? Company,
      string? LinkedIn,
      int? CurrentJobId,
-     int? TrackId);
+     int? TrackId, string? Phone);
 }

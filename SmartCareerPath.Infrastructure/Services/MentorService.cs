@@ -100,7 +100,7 @@ namespace SmartCareerPath.Infrastructure.Services
             mentor.LinkedIn = dto.LinkedIn;
             mentor.CurrentJobId = dto.CurrentJobId;
             mentor.TrackId = dto.TrackId;
-
+            mentor.Phone = dto.Phone;
             await _db.SaveChangesAsync();
 
             // Fix: reload navigation properties after save — TrackId/CurrentJobId FKs
@@ -116,7 +116,7 @@ namespace SmartCareerPath.Infrastructure.Services
        mentor.YearsOfExperience, mentor.TotalStudentsTaught,
        mentor.Description, mentor.Company, mentor.LinkedIn,
       mentor.CurrentJobId, mentor.CurrentJob?.Value,
-      mentor.TrackId, mentor.Track?.Name);
+      mentor.TrackId, mentor.Track?.Name, mentor.Phone);
 
     }
 }

@@ -13,6 +13,8 @@ namespace SmartCareerPath.Infrastructure.Persistence.Configurations
 
             builder.Property(s => s.LinkedIn)
               .HasMaxLength(200);
+            builder.Property(s => s.Phone)
+                .HasMaxLength(20);
 
             // Many:1 — Seeker → LookupValue (CurrentJob)
             builder.HasOne(s => s.CurrentJob)

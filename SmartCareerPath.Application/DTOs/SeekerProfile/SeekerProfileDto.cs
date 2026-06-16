@@ -2,5 +2,5 @@
 {
     public record SeekerProfileDto(
     string Id, string FirstName, string LastName, string Email,
-    string? LinkedIn, int? CurrentJobId, string? CurrentJobTitle);
+    string? LinkedIn, int? CurrentJobId, string? CurrentJobTitle, string? Phone);
 }

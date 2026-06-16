@@ -25,7 +25,7 @@ namespace SmartCareerPath.Infrastructure.Services
             return new SeekerProfileDto(
                 seeker.Id, seeker.FirstName, seeker.LastName,
                 seeker.Email!, seeker.LinkedIn,
-                seeker.CurrentJobId, seeker.CurrentJob?.Value);
+                seeker.CurrentJobId, seeker.CurrentJob?.Value, seeker.Phone);
         }
         public async Task<IEnumerable<RecommendationDto>> GetRecommendationsAsync(string seekerId)
         {
@@ -166,6 +166,7 @@ namespace SmartCareerPath.Infrastructure.Services
             seeker.LastName = dto.LastName;
             seeker.LinkedIn = dto.LinkedIn;
             seeker.CurrentJobId = dto.CurrentJobId;
+            seeker.Phone = dto.Phone;
             await _db.SaveChangesAsync();
 
             // Re-query to load updated navigation property for the response
@@ -174,7 +175,7 @@ namespace SmartCareerPath.Infrastructure.Services
             return new SeekerProfileDto(
                 seeker.Id, seeker.FirstName, seeker.LastName,
                 seeker.Email!, seeker.LinkedIn,
-                seeker.CurrentJobId, seeker.CurrentJob?.Value);
+                seeker.CurrentJobId, seeker.CurrentJob?.Value, seeker.Phone);
         }
 
 

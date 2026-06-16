@@ -12,7 +12,8 @@
     string? Description,
     string? LinkedIn,
     int? CurrentJobId,
-    int? TrackId
+    int? TrackId,
+    string? Phone
 
 
 

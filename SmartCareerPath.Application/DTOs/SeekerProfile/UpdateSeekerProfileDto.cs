@@ -2,5 +2,5 @@
 {
     public record UpdateSeekerProfileDto(
     string FirstName, string LastName,
-    string? LinkedIn, int? CurrentJobId);
+    string? LinkedIn, int? CurrentJobId, string? Phone);
 }

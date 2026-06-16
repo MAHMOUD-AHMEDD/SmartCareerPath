@@ -9,6 +9,7 @@ namespace SmartCareerPath.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Mentor> builder)
         {
             builder.ToTable("Mentors");  // TPT
+            builder.Property(s => s.Phone).HasMaxLength(20);
 
 
             builder.Property(m => m.Description)

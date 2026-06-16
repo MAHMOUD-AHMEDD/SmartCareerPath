@@ -8,6 +8,7 @@
     string Email,
     string? LinkedIn,
     int? CurrentJobId,
-    string? CurrentJobTitle
+    string? CurrentJobTitle,
+    string? Phone
 );
 }

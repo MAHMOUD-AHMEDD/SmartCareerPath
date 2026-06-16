@@ -17,7 +17,11 @@ namespace SmartCareerPath.Application.Validator.Auth
                 .Matches("[^a-zA-Z0-9]").WithMessage("Password must contain at least one special character.");
             RuleFor(x => x.FirstName).NotEmpty().MaximumLength(50);
             RuleFor(x => x.LastName).NotEmpty().MaximumLength(50);
-            RuleFor(x => x.YearsOfExperience).GreaterThan(0);
+            RuleFor(x => x.YearsOfExperience).GreaterThan(0); 
+            RuleFor(x => x.Phone)
+    .Matches(@"^\+?[0-9]{7,15}$")
+    .When(x => x.Phone != null)
+    .WithMessage("Phone must be a valid number (7–15 digits, optional + prefix).");
         }
     }
 }
