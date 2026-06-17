@@ -23,14 +23,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll", policy =>
+//    {
+//        policy
+//            .AllowAnyOrigin()
+//            .AllowAnyMethod()
+//            .AllowAnyHeader();
+//        //.AllowCredentials();
+//    });
+//});
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins(
+                "http://localhost:5173",           // ADD THIS (Vite dev server)
+                "http://localhost:3000",           // keep for CRA if needed
+                "https://your-frontend-domain.com" // production frontend URL
+            )
+            .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowCredentials();
     });
 });
 
@@ -123,6 +139,13 @@ builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IChatRequestService, ChatRequestService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
+
+
+// Add HttpClient for the AI service
+builder.Services.AddHttpClient<IAiRecommendationService, AiRecommendationService>();
+
+// Register the service
+builder.Services.AddScoped<IAiRecommendationService, AiRecommendationService>();
 
 
 // ===============================================
@@ -259,7 +282,6 @@ builder.Services.AddHealthChecks()
 // ===============================================
 var app = builder.Build();
 
-app.UseCors("AllowAll");
 
 // ===============================================
 // 7. SEED DATABASE
@@ -292,6 +314,9 @@ using (var scope = app.Services.CreateScope())
 // 8. MIDDLEWARE PIPELINE (ORDER IS CRITICAL)
 // ===============================================
 app.UseMiddleware<GlobalExceptionMiddleware>(); // FIRST - wraps everything
+
+
+app.UseCors("FrontendPolicy");
 
 
 app.UseSwagger();

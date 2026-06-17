@@ -14,7 +14,12 @@ namespace SmartCareerPath.Infrastructure.Services
     {
 
         private readonly AppDbContext _db;
-        public SeekerService(AppDbContext db) => _db = db;
+        private readonly IAiRecommendationService _aiService;
+        public SeekerService(AppDbContext db, IAiRecommendationService aiService)
+        {
+            _db = db;
+            _aiService = aiService;
+        }
         public async Task<SeekerProfileDto> GetProfileAsync(string seekerId)
         {
             var seeker = await _db.Seekers
@@ -144,6 +149,8 @@ namespace SmartCareerPath.Infrastructure.Services
             }
 
             await _db.SaveChangesAsync();
+
+            await _aiService.CallAndSaveAsync(seekerId);
         }
 
         public async Task<SeekerProfileDto> UpdateProfileAsync(

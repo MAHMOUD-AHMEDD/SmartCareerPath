@@ -114,38 +114,39 @@ public static class DataSeeder
         db.CareerTracks.AddRange(
             new CareerTrack
             {
-                Name = "Backend Development",
-                Description = "Build robust server-side systems, APIs, and databases. "
-                            + "Master languages like C#, Java, or Node.js alongside "
-                            + "cloud infrastructure and system design."
+                Name = "Artificial Intelligence",
+                Description = "Build intelligent systems using deep learning, NLP, and AI engineering. "
+                            + "Master Python, PyTorch/TensorFlow, and ML model deployment."
             },
             new CareerTrack
             {
-                Name = "Frontend Development",
-                Description = "Create engaging web interfaces using modern JavaScript "
-                            + "frameworks like React or Angular. Focus on UX, "
-                            + "accessibility, and performance."
+                Name = "Data Science",
+                Description = "Analyse large datasets, build predictive models, and extract business insights "
+                            + "using Python, Pandas, scikit-learn, and data visualisation tools."
             },
             new CareerTrack
             {
-                Name = "Data Science & AI",
-                Description = "Analyse large datasets, build machine-learning models, "
-                            + "and deploy intelligent systems using Python, TensorFlow, "
-                            + "and cloud ML platforms."
+                Name = "Development",
+                Description = "Build web and mobile applications from frontend to backend. "
+                            + "Master frameworks like React, Node.js, ASP.NET Core, and databases."
             },
             new CareerTrack
             {
-                Name = "Cybersecurity",
-                Description = "Protect systems and networks from threats. Learn ethical "
-                            + "hacking, penetration testing, threat analysis, and "
-                            + "security compliance frameworks."
+                Name = "Security",
+                Description = "Protect systems and networks from threats. Learn ethical hacking, "
+                            + "penetration testing, network security, and compliance frameworks."
             },
             new CareerTrack
             {
-                Name = "DevOps & Cloud Engineering",
-                Description = "Automate software delivery pipelines, manage cloud "
-                            + "infrastructure with AWS/Azure/GCP, and master "
-                            + "containerisation with Docker and Kubernetes."
+                Name = "Software Development and Engineering",
+                Description = "Design scalable software systems with solid engineering principles. "
+                            + "Focus on system design, cloud computing, DevOps, and software quality."
+            },
+            new CareerTrack
+            {
+                Name = "User Experience (UX) and UI Design",
+                Description = "Create intuitive and beautiful digital experiences. "
+                            + "Master UX research, UI design, Figma, and accessibility principles."
             }
         );
         await db.SaveChangesAsync();
@@ -160,153 +161,80 @@ public static class DataSeeder
     {
         if (await db.Roadmaps.AnyAsync()) return;
 
-        var tracks = await db.CareerTracks.OrderBy(t => t.Id).ToListAsync();
+        var tracks = await db.CareerTracks.ToDictionaryAsync(t => t.Name, t => t.Id);
 
-        // Helper to build a Roadmap with its items inline
-        static Roadmap BuildRoadmap(
-            CareerTrack track, string title, string desc,
-            IEnumerable<(string t, string d, string? link)> items)
-        {
-            var roadmap = new Roadmap
+        static Roadmap Build(int trackId, string title, string desc,
+            params (string t, string d, string? link)[] items) => new()
             {
-                TrackId = track.Id,
+                TrackId = trackId,
                 Title = title,
                 Description = desc,
-                Items = items.Select((item, idx) => new RoadmapItem
+                Items = items.Select((x, i) => new RoadmapItem
                 {
-                    Title = item.t,
-                    Description = item.d,
-                    OrderIndex = idx + 1,
+                    Title = x.t,
+                    Description = x.d,
+                    OrderIndex = i + 1,
                     DefaultStatus = "NotStarted",
-                    Link = item.link
+                    Link = x.link
                 }).ToList()
             };
-            return roadmap;
-        }
-
-        var backendTrack = tracks.First(t => t.Name == "Backend Development");
-        var frontendTrack = tracks.First(t => t.Name == "Frontend Development");
-        var dsTrack = tracks.First(t => t.Name == "Data Science & AI");
-        var secTrack = tracks.First(t => t.Name == "Cybersecurity");
-        var devopsTrack = tracks.First(t => t.Name == "DevOps & Cloud Engineering");
 
         db.Roadmaps.AddRange(
 
-            // --- Backend ---
-            BuildRoadmap(backendTrack,
-                "Backend Developer Roadmap",
-                "Step-by-step guide from zero to production-ready backend engineer.",
-                new[]
-                {
-                    ("Master C# & .NET Fundamentals",
-                     "OOP, LINQ, async/await, dependency injection, and the .NET runtime model.",
-                     "https://learn.microsoft.com/en-us/dotnet/csharp/"),
-                    ("Build REST APIs with ASP.NET Core",
-                     "Controllers, routing, middleware, model binding, and Swagger documentation.",
-                     "https://learn.microsoft.com/en-us/aspnet/core/web-api/"),
-                    ("Database Design & Entity Framework Core",
-                     "Relational modelling, EF Core migrations, LINQ queries, and performance tuning.",
-                     "https://learn.microsoft.com/en-us/ef/core/"),
-                    ("Authentication & Security",
-                     "JWT, OAuth 2.0, ASP.NET Identity, HTTPS, and OWASP top-10 mitigations.",
-                     "https://owasp.org/www-project-top-ten/"),
-                    ("Cloud Deployment & CI/CD",
-                     "Docker containers, GitHub Actions pipelines, and deploying to Azure or AWS.",
-                     "https://docs.docker.com/get-started/")
-                }),
+            Build(tracks["Artificial Intelligence"],
+                "Artificial Intelligence Roadmap",
+                "From Python basics to deploying production AI models.",
+                ("Python & Math Foundations", "NumPy, Pandas, linear algebra, calculus, and probability.", "https://www.python.org/"),
+                ("Machine Learning Basics", "scikit-learn, supervised/unsupervised learning, evaluation.", "https://scikit-learn.org/"),
+                ("Deep Learning", "PyTorch or TensorFlow, CNNs, RNNs, transformers.", "https://pytorch.org/tutorials/"),
+                ("NLP & Computer Vision", "HuggingFace, BERT, YOLO, image classification pipelines.", "https://huggingface.co/"),
+                ("MLOps & Deployment", "MLflow, FastAPI, Docker, model serving on cloud platforms.", "https://mlflow.org/")),
 
-            // --- Frontend ---
-            BuildRoadmap(frontendTrack,
-                "Frontend Developer Roadmap",
-                "From HTML basics to production React applications.",
-                new[]
-                {
-                    ("HTML5, CSS3 & Responsive Design",
-                     "Semantic markup, Flexbox, Grid, media queries, and accessibility standards.",
-                     "https://developer.mozilla.org/en-US/docs/Web"),
-                    ("JavaScript & TypeScript Essentials",
-                     "ES2022+, closures, promises, async/await, and TypeScript type system.",
-                     "https://www.typescriptlang.org/docs/"),
-                    ("React & State Management",
-                     "Hooks, component patterns, Context API, Redux Toolkit, and React Query.",
-                     "https://react.dev/"),
-                    ("Testing & Performance",
-                     "Jest, React Testing Library, Lighthouse audits, and Core Web Vitals.",
-                     "https://jestjs.io/"),
-                    ("Build Tools & Deployment",
-                     "Vite, Webpack basics, CI pipelines, and deploying to Vercel or Netlify.",
-                     "https://vitejs.dev/")
-                }),
+            Build(tracks["Data Science"],
+                "Data Science Roadmap",
+                "From data wrangling to business insight delivery.",
+                ("Python for Data Science", "Pandas, NumPy, Matplotlib, Seaborn.", "https://pandas.pydata.org/"),
+                ("Statistics & Probability", "Hypothesis testing, regression, Bayesian thinking.", "https://www.khanacademy.org/math/statistics-probability"),
+                ("SQL & Databases", "Advanced SQL, window functions, data modelling.", "https://mode.com/sql-tutorial/"),
+                ("Machine Learning", "scikit-learn pipelines, feature engineering, model selection.", "https://scikit-learn.org/"),
+                ("Data Visualisation & BI", "Tableau, Power BI, Plotly, storytelling with data.", "https://public.tableau.com/")),
 
-            // --- Data Science ---
-            BuildRoadmap(dsTrack,
-                "Data Science & AI Roadmap",
-                "Build a foundation in statistics, ML, and AI engineering.",
-                new[]
-                {
-                    ("Python for Data Science",
-                     "NumPy, Pandas, Matplotlib, and Seaborn for data wrangling and visualisation.",
-                     "https://pandas.pydata.org/docs/"),
-                    ("Statistics & Probability",
-                     "Descriptive stats, hypothesis testing, regression, and Bayesian thinking.",
-                     "https://www.khanacademy.org/math/statistics-probability"),
-                    ("Machine Learning with scikit-learn",
-                     "Supervised and unsupervised learning, model evaluation, and pipelines.",
-                     "https://scikit-learn.org/stable/"),
-                    ("Deep Learning with TensorFlow / PyTorch",
-                     "Neural networks, CNNs, RNNs, transfer learning, and model deployment.",
-                     "https://www.tensorflow.org/tutorials"),
-                    ("Data Engineering & MLOps",
-                     "SQL/NoSQL databases, Spark basics, MLflow experiment tracking, and API deployment.",
-                     "https://mlflow.org/docs/latest/index.html")
-                }),
+            Build(tracks["Development"],
+                "Development Roadmap",
+                "Full-stack web and mobile application development.",
+                ("HTML, CSS & JavaScript", "Responsive design, ES2022+, TypeScript basics.", "https://developer.mozilla.org/"),
+                ("Frontend Framework", "React or Angular — components, state, routing.", "https://react.dev/"),
+                ("Backend & APIs", "Node.js or ASP.NET Core, REST APIs, authentication.", "https://learn.microsoft.com/en-us/aspnet/core/"),
+                ("Databases", "SQL and NoSQL, ORM basics, query optimisation.", "https://www.postgresql.org/"),
+                ("Deployment & DevOps", "Docker, CI/CD pipelines, cloud hosting.", "https://docs.docker.com/")),
 
-            // --- Cybersecurity ---
-            BuildRoadmap(secTrack,
+            Build(tracks["Security"],
                 "Cybersecurity Roadmap",
-                "From networking fundamentals to ethical hacking and cloud security.",
-                new[]
-                {
-                    ("Networking & Operating Systems",
-                     "TCP/IP, DNS, HTTP/S, Linux CLI, file permissions, and process management.",
-                     "https://www.comptia.org/certifications/network"),
-                    ("Security Fundamentals & Cryptography",
-                     "CIA triad, encryption algorithms, PKI, TLS, and certificate management.",
-                     "https://www.coursera.org/learn/crypto"),
-                    ("Ethical Hacking & Penetration Testing",
-                     "Kali Linux, Metasploit, Burp Suite, OWASP methodology, and CTF practice.",
-                     "https://www.hackthebox.com/"),
-                    ("Threat Analysis & Incident Response",
-                     "SIEM tools, log analysis, threat modelling, and forensic investigation.",
-                     "https://www.splunk.com/en_us/training.html"),
-                    ("Cloud Security & Compliance",
-                     "AWS/Azure security services, IAM policies, SOC 2, ISO 27001 basics.",
-                     "https://aws.amazon.com/security/")
-                }),
+                "From networking fundamentals to ethical hacking.",
+                ("Networking & OS Basics", "TCP/IP, Linux CLI, file permissions, process management.", "https://www.comptia.org/certifications/network"),
+                ("Security Fundamentals", "CIA triad, encryption, PKI, TLS, certificate management.", "https://www.coursera.org/learn/crypto"),
+                ("Ethical Hacking", "Kali Linux, Metasploit, Burp Suite, OWASP methodology.", "https://www.hackthebox.com/"),
+                ("Threat Analysis", "SIEM tools, log analysis, threat modelling, forensics.", "https://www.splunk.com/"),
+                ("Cloud Security", "AWS/Azure security services, IAM, SOC 2, ISO 27001.", "https://aws.amazon.com/security/")),
 
-            // --- DevOps ---
-            BuildRoadmap(devopsTrack,
-                "DevOps & Cloud Engineering Roadmap",
-                "Automate, scale, and secure modern software delivery pipelines.",
-                new[]
-                {
-                    ("Linux, Bash & Version Control",
-                     "Shell scripting, file system, systemd, and advanced Git workflows.",
-                     "https://www.gnu.org/software/bash/manual/"),
-                    ("Docker & Container Orchestration",
-                     "Dockerfile, docker-compose, Kubernetes pods, deployments, and services.",
-                     "https://kubernetes.io/docs/home/"),
-                    ("CI/CD Pipelines",
-                     "GitHub Actions, GitLab CI, Jenkins, artifact management, and deployment strategies.",
-                     "https://docs.github.com/en/actions"),
-                    ("Infrastructure as Code",
-                     "Terraform, AWS CloudFormation, Ansible, and managing state safely.",
-                     "https://developer.hashicorp.com/terraform/docs"),
-                    ("Monitoring, Logging & Reliability",
-                     "Prometheus, Grafana, ELK stack, SLOs, and on-call runbooks.",
-                     "https://prometheus.io/docs/introduction/overview/")
-                })
-        );
+            Build(tracks["Software Development and Engineering"],
+                "Software Engineering Roadmap",
+                "System design, cloud, DevOps, and engineering excellence.",
+                ("Data Structures & Algorithms", "Big-O, sorting, graphs, dynamic programming.", "https://leetcode.com/"),
+                ("System Design", "Scalability, load balancing, caching, microservices.", "https://github.com/donnemartin/system-design-primer"),
+                ("Cloud & Infrastructure", "AWS/Azure, Terraform, infrastructure as code.", "https://developer.hashicorp.com/terraform/docs"),
+                ("CI/CD & DevOps", "GitHub Actions, Docker, Kubernetes, deployment strategies.", "https://docs.github.com/en/actions"),
+                ("Software Quality", "Unit testing, TDD, code review, technical debt management.", "https://martinfowler.com/")),
+
+            Build(tracks["User Experience (UX) and UI Design"],
+                "UX & UI Design Roadmap",
+                "From design thinking to production-ready interfaces.",
+                ("Design Fundamentals", "Typography, colour theory, layout, visual hierarchy.", "https://www.canva.com/learn/design/"),
+                ("UX Research & Thinking", "User interviews, personas, journey maps, usability testing.", "https://www.nngroup.com/"),
+                ("Figma & Prototyping", "Wireframes, interactive prototypes, component libraries.", "https://www.figma.com/"),
+                ("Accessibility & Standards", "WCAG guidelines, inclusive design, screen reader testing.", "https://www.w3.org/WAI/"),
+                ("Handoff & Collaboration", "Dev handoff in Figma, design systems, working with devs.", "https://zeroheight.com/"))
+    );
 
         await db.SaveChangesAsync();
     }
@@ -320,100 +248,45 @@ public static class DataSeeder
     {
         if (await db.Questions.AnyAsync()) return;
 
-        // ── MCQ helper ────────────────────────────────────────────────────────
-        static Question MCQ(string text, params string[] options)
-            => new()
-            {
-                QuestionText = text,
-                QuestionType = "MCQ",
-                Options = options.Select(o => new QuestionOption
-                {
-                    OptionText = o,
-                    CreatedAt = DateTime.UtcNow
-                }).ToList()
-            };
-
-        // ── OpenText helper ───────────────────────────────────────────────────
-        static Question Open(string text)
-            => new() { QuestionText = text, QuestionType = "OpenText" };
+        static Question YesNo(string text) => new()
+        {
+            QuestionText = text,
+            QuestionType = "MCQ",
+            Options =
+            [
+                new QuestionOption { OptionText = "Yes", CreatedAt = DateTime.UtcNow },
+            new QuestionOption { OptionText = "No",  CreatedAt = DateTime.UtcNow }
+            ]
+        };
 
         db.Questions.AddRange(
-
-            // Q1 — preferred work type
-            MCQ("What type of work do you enjoy most?",
-                "Building and designing systems or applications",
-                "Analysing data and finding patterns",
-                "Securing and protecting systems",
-                "Automating and managing infrastructure"),
-
-            // Q2 — programming preference
-            MCQ("Which programming activity excites you the most?",
-                "Writing server-side logic and APIs",
-                "Creating interactive user interfaces",
-                "Training machine-learning models",
-                "Writing automation scripts and pipelines"),
-
-            // Q3 — problem-solving style
-            MCQ("How do you prefer to solve problems?",
-                "Breaking down large systems into components",
-                "Visualising data to find insights",
-                "Thinking like an attacker to find weaknesses",
-                "Optimising processes for speed and reliability"),
-
-            // Q4 — preferred tools
-            MCQ("Which set of tools appeals to you the most?",
-                "C#, .NET, SQL Server, Docker",
-                "React, TypeScript, CSS, Figma",
-                "Python, Jupyter, TensorFlow, SQL",
-                "Linux, Kubernetes, Terraform, Prometheus"),
-
-            // Q5 — work environment
-            MCQ("What kind of team role suits you best?",
-                "Back-end engineer responsible for APIs and databases",
-                "Front-end engineer responsible for the user experience",
-                "Data engineer or ML engineer building intelligent features",
-                "Cloud/platform engineer ensuring reliability at scale"),
-
-            // Q6 — learning preference
-            MCQ("How do you prefer to learn new technology?",
-                "Reading official documentation and building projects",
-                "Watching design tutorials and replicating UIs",
-                "Experimenting with datasets and Kaggle competitions",
-                "Following cloud certifications and labs"),
-
-            // Q7 — career goal
-            MCQ("What is your primary career goal in the next two years?",
-                "Land a backend or full-stack developer role",
-                "Become a frontend or UI engineer",
-                "Join a data science or AI team",
-                "Work as a security analyst or cloud engineer"),
-
-            // Q8 — strength
-            MCQ("What is your greatest technical strength right now?",
-                "Writing clean, well-structured code",
-                "Turning designs into pixel-perfect web pages",
-                "Working with numbers, statistics, and spreadsheets",
-                "Configuring servers, networks, or cloud services"),
-
-            // Q9 — interest in security
-            MCQ("How interested are you in cybersecurity topics?",
-                "Very interested — I want to make it my career",
-                "Somewhat interested — I want security awareness",
-                "Neutral — security is just one aspect of my work",
-                "Not my focus — I prefer other areas"),
-
-            // Q10 — cloud comfort
-            MCQ("How comfortable are you with cloud and DevOps concepts?",
-                "Very comfortable — I already use cloud services",
-                "Somewhat comfortable — I have basic knowledge",
-                "Learning — I am just getting started",
-                "Not yet — I prefer local development for now"),
-
-            // Q11 — open text: background
-            Open("Briefly describe your educational background and any relevant work experience."),
-
-            // Q12 — open text: goal
-            Open("What specific career outcome are you hoping to achieve in the next 12 months?")
+            YesNo("When you visit a page online, are you curious how its look, buttons, and pages were actually made?"),
+            YesNo("Do you ever look at an app on your phone and wonder how it was built?"),
+            YesNo("Are you fascinated by computers that can make decisions or 'think' on their own, like chatbots or self-driving cars?"),
+            YesNo("When something is broken or confusing, do you enjoy digging in step by step until you figure out why?"),
+            YesNo("Do you find it interesting how hackers break into systems, and how people defend against them?"),
+            YesNo("Are you curious how your phone connects to WiFi, or how computers talk to each other over the internet?"),
+            YesNo("Do you like the idea of organizing huge amounts of information so it's easy to find later?"),
+            YesNo("Do you enjoy looking at numbers or spreadsheets and turning them into charts that tell a story?"),
+            YesNo("Do you enjoy checking whether two separate apps or systems actually work correctly when connected together?"),
+            YesNo("Are you the type of person who gets annoyed when an app is slow, and wants to know exactly why?"),
+            YesNo("Do you enjoy working with probabilities and numbers, like predicting outcomes or analyzing surveys?"),
+            YesNo("Are you curious about how a computer can learn to recognize a face or voice just from seeing lots of examples?"),
+            YesNo("Would you find it exciting to teach a computer to improve at a task just by giving it more data?"),
+            YesNo("Do you like the idea of building the 'pipes' that move information from one place to another automatically?"),
+            YesNo("Are you curious how things like Google Drive or Netflix run on remote servers in the cloud?"),
+            YesNo("Are you curious about how cryptocurrencies like Bitcoin keep records securely without one central authority?"),
+            YesNo("Do you enjoy planning things out on a big-picture level, like how all pieces of a large project fit together?"),
+            YesNo("Do you enjoy organizing people, deadlines, and tasks to make sure a project gets finished on time?"),
+            YesNo("Have you ever played a video game and wished you could build your own?"),
+            YesNo("Are you interested in protecting a company's internet connections and servers from outside attacks?"),
+            YesNo("Do you enjoy making things look visually appealing, like posters, logos, or color schemes?"),
+            YesNo("Do you get frustrated when an app or website is confusing to use, and think about how it could be simpler?"),
+            YesNo("Are you interested in smart gadgets, like smart watches, smart thermostats, or smart light bulbs?"),
+            YesNo("Are you interested in how companies like Amazon or Google handle and store enormous amounts of data?"),
+            YesNo("Are you curious how apps can automatically blur backgrounds, detect faces, or enhance photos?"),
+            YesNo("Do you enjoy cleaning up messy information and reshaping it so it's more useful before analyzing it?"),
+            YesNo("Do you have a knack for spotting mistakes or things that don't work right before anyone else notices?")
         );
 
         await db.SaveChangesAsync();
