@@ -12,6 +12,6 @@ namespace SmartCareerPath.Application.Interfaces
         Task SubmitAnswersAsync(string seekerId, SubmitAnswersDto dto);
         Task<IEnumerable<RecommendationDto>> GetRecommendationsAsync(string seekerId);
         Task<SeekerRoadmapDto> GetRoadmapProgressAsync(string seekerId, int trackId);
-        Task UpdateRoadmapItemStatusAsync(string seekerId, int roadmapItemId, string status);
+        Task UpdateRoadmapItemStatusAsync(string seekerId, int itemId, UpdateRoadmapItemStatusDto dto);
     }
 }

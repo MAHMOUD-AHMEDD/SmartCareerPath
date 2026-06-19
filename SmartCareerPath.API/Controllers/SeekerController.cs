@@ -42,7 +42,7 @@ namespace SmartCareerPath.API.Controllers
         public async Task<IActionResult> UpdateItemStatus(
             int itemId, [FromBody] UpdateRoadmapItemStatusDto dto)
         {
-            await _seekerService.UpdateRoadmapItemStatusAsync(SeekerId, itemId, dto.Status);
+            await _seekerService.UpdateRoadmapItemStatusAsync(SeekerId, itemId, dto);
             return NoContent();
         }
     }

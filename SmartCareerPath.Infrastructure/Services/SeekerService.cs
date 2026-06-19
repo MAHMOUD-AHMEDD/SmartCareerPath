@@ -219,5 +219,6 @@ namespace SmartCareerPath.Infrastructure.Services
 
             await _db.SaveChangesAsync();
         }
+
     }
 }
