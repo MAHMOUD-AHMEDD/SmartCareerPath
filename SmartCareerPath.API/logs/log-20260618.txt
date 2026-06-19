@@ -1,0 +1,2 @@
+2026-06-18 00:26:35.558 +03:00 [ERR] Failed executing DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Seekers] ADD [Phone] nvarchar(20) NULL;

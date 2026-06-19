@@ -100,18 +100,35 @@ namespace SmartCareerPath.Infrastructure.Services
         public async Task ForgotPasswordAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            // Security: always return the same response whether the user exists or not.
-            if (user is null) return;
+            if (user is null) return;  // security: same response for unknown emails
 
             try
             {
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                // Invalidate any existing unused codes for this user
+                var oldCodes = await _db.PasswordResetCodes
+                    .Where(c => c.UserId == user.Id && !c.IsUsed)
+                    .ToListAsync();
+                _db.PasswordResetCodes.RemoveRange(oldCodes);
+
+                // Generate 6-digit code and save with 15-minute expiry
+                var code = Random.Shared.Next(100000, 999999).ToString();
+
+                _db.PasswordResetCodes.Add(new PasswordResetCode
+                {
+                    UserId = user.Id,
+                    Code = code,
+                    ExpiresAt = DateTime.UtcNow.AddMinutes(15),
+                    IsUsed = false
+                });
+
+                await _db.SaveChangesAsync();
+
                 await _emailService.SendPasswordResetEmailAsync(
-                    user.Email!, $"{user.FirstName} {user.LastName}", token);
+                    user.Email!, $"{user.FirstName} {user.LastName}", code);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to send password reset email to {Email}", email);
+                _logger.LogError(ex, "Failed to send password reset code to {Email}", email);
             }
         }
 
@@ -119,18 +136,34 @@ namespace SmartCareerPath.Infrastructure.Services
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
 
-
-            const string genericError = "Password reset failed. The token may be invalid or expired.";
+            const string genericError =
+                "Password reset failed. The code may be invalid or expired.";
 
             if (user is null)
                 throw new InvalidOperationException(genericError);
 
-            var safeToken = dto.Token.Replace(" ", "+");
-            var result = await _userManager.ResetPasswordAsync(user, safeToken, dto.NewPassword);
+            // Validate the 6-digit code
+            var resetCode = await _db.PasswordResetCodes
+                .FirstOrDefaultAsync(c =>
+                    c.UserId == user.Id &&
+                    c.Code == dto.Code &&
+                    !c.IsUsed &&
+                    c.ExpiresAt > DateTime.UtcNow);
+
+            if (resetCode is null)
+                throw new InvalidOperationException(genericError);
+
+            // Generate Identity token internally — never exposed to the user
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, dto.NewPassword);
 
             if (!result.Succeeded)
                 throw new InvalidOperationException(
                     string.Join(", ", result.Errors.Select(e => e.Description)));
+
+            // Mark code as used so it cannot be replayed
+            resetCode.IsUsed = true;
+            await _db.SaveChangesAsync();
         }
 
         private string BuildConfirmUrl(string email, string token)

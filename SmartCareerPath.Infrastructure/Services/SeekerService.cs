@@ -187,33 +187,33 @@ namespace SmartCareerPath.Infrastructure.Services
 
 
         public async Task UpdateRoadmapItemStatusAsync(
-    string seekerId, int roadmapItemId, string status)
+    string seekerId, int itemId, UpdateRoadmapItemStatusDto dto)
         {
+            var item = await _db.RoadmapItems.FindAsync(itemId)
+                ?? throw new KeyNotFoundException($"RoadmapItem {itemId} not found.");
 
-            if (!Enum.TryParse<RoadmapItemStatus>(status, out _))
-                throw new InvalidOperationException(
-                    "Status must be 'NotStarted', 'InProgress', or 'Completed'.");
+            // true = Completed, false = NotStarted
+            var status = dto.IsCompleted
+                ? RoadmapItemStatus.Completed
+                : RoadmapItemStatus.NotStarted;
 
-            // Validate item exists
-            var itemExists = await _db.RoadmapItems.AnyAsync(i => i.Id == roadmapItemId);
-            if (!itemExists) throw new KeyNotFoundException($"RoadmapItem {roadmapItemId} not found.");
-
-            // Upsert progress row
             var progress = await _db.SeekerRoadmapProgress
-                .FirstOrDefaultAsync(p =>
-                    p.SeekerId == seekerId && p.RoadmapItemId == roadmapItemId);
+                .FirstOrDefaultAsync(p => p.SeekerId == seekerId
+                                       && p.RoadmapItemId == itemId);
 
             if (progress is null)
+            {
                 _db.SeekerRoadmapProgress.Add(new SeekerRoadmapProgress
                 {
                     SeekerId = seekerId,
-                    RoadmapItemId = roadmapItemId,
-                    Status = status,
+                    RoadmapItemId = itemId,
+                    Status = status.ToString(),
                     UpdatedAt = DateTime.UtcNow
                 });
+            }
             else
             {
-                progress.Status = status;
+                progress.Status = status.ToString();
                 progress.UpdatedAt = DateTime.UtcNow;
             }
 

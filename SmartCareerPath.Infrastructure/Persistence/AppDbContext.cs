@@ -29,7 +29,7 @@ namespace SmartCareerPath.Infrastructure.Persistence
         public DbSet<Message> Messages => Set<Message>();
         public DbSet<ChatRequest> ChatRequests => Set<ChatRequest>();
         public DbSet<Notification> Notifications => Set<Notification>();
-
+        public DbSet<PasswordResetCode> PasswordResetCodes => Set<PasswordResetCode>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

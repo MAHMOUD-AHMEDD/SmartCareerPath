@@ -8,7 +8,9 @@ namespace SmartCareerPath.Application.Validator.Auth
         public ResetPasswordValidator()
         {
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
-            RuleFor(x => x.Token).NotEmpty();
+            RuleFor(x => x.Code)
+            .NotEmpty()
+            .Matches(@"^\d{6}$").WithMessage("Code must be exactly 6 digits.");
             RuleFor(x => x.NewPassword)
                 .NotEmpty().MinimumLength(8)
                 .Matches("[A-Z]").WithMessage("Must contain an uppercase letter.")
