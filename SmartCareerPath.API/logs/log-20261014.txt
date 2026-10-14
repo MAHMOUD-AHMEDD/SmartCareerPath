@@ -1,0 +1,10 @@
+2026-10-14 02:55:58.782 +03:00 [INF] Now listening on: http://localhost:5183
+2026-10-14 02:55:58.928 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-14 02:55:58.931 +03:00 [INF] Hosting environment: Development
+2026-10-14 02:55:58.933 +03:00 [INF] Content root path: D:\Graduation Project\Implemntaion\SmartCareerPath.API
+2026-10-14 02:56:18.195 +03:00 [INF] Application is shutting down...
+2026-10-14 02:56:36.968 +03:00 [INF] Now listening on: http://localhost:5183
+2026-10-14 02:56:37.024 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-14 02:56:37.028 +03:00 [INF] Hosting environment: Development
+2026-10-14 02:56:37.029 +03:00 [INF] Content root path: D:\Graduation Project\Implemntaion\SmartCareerPath.API
+2026-10-14 03:03:07.015 +03:00 [INF] Application is shutting down...
