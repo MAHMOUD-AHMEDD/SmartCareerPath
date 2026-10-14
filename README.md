@@ -106,7 +106,7 @@ Dependencies point inward: `API → Infrastructure → Application → Domain`.
 ## Database Design
 
 <!-- ADD HERE: ERD image exported from dbdiagram.io -->
-![ERD](docs/images/erd.png)
+![ERD](docs/images/erd.jpg)
 
 Main tables:
 
